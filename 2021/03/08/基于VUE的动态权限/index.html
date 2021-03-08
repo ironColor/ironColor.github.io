@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="
+ 我司的业务需求中，每个角色所拥有的权限是可以灵活配置修改的，系统的角色数量在上线后也是可以修改的。经过讨论以及考虑到实际的开发情况，决定由前端来主导动态权限，而后端只返回未处理的路由数据。 ">
+  
+  <meta name="author" content="hbw">
+  <meta name="keywords" content="">
+  
+  <title>基于VUE的动态权限 - ironColor</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ironColor</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="基于VUE的动态权限">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-08 13:50" pubdate>
+        2021年3月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于VUE的动态权限</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p> 我司的业务需求中，每个角色所拥有的权限是可以灵活配置修改的，系统的角色数量在上线后也是可以修改的。经过讨论以及考虑到实际的开发情况，决定由前端来主导动态权限，而后端只返回未处理的路由数据。 </p>
+<span id="more"></span>
+<p>参考资料 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903478880370701#heading-4">手摸手，带你用vue撸后台 系列二(登录权限篇)</a>  –by 花裤衩</p>
+</blockquote>
+<h1 id="前言-amp-概念"><a href="#前言-amp-概念" class="headerlink" title="前言&amp;概念"></a>前言&amp;概念</h1><p>​    首先，需要明确的是权限在前端意味着什么：权限在前端给予用户的就是菜单栏的可视化，用户是否有权进入某个页面，也可以说是url的变化。当然，如果颗粒度如果要更细的情况下，还可以做到按钮级的权限控制，而本文主要介绍的是页面级的权限控制。</p>
+<p>​    <strong>前端主导的动态权限难点在于：何时生成路由树、后端存储的数据格式 、如何递归生成对应的路由书、 路由树筛选</strong></p>
+<p>​    为了方便阅读和节省时间，现说明相关名词：</p>
+<p>​    路由树即vue-router中的路由数组。</p>
+<p>​    路由数据是后端返回的存储在路由表中的一项项数据，这些数据记录的是路由树中每一项的基础信息，包括title、图标、允许访问的角色等信息。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="生成路由树的时间"><a href="#生成路由树的时间" class="headerlink" title="生成路由树的时间"></a>生成路由树的时间</h2><p>​    首先，能够想到的就是在用户登录成功后需要生成对应的路由树，同时进一步考虑当用户想在路由中输入不属于该角色的url时该如何拦截、是不是所有的路径都需要拦截。</p>
+<p>​    这里需要用到vue-router的beforeEach导航守卫，在每次的路由跳转的时候进行业务处理。</p>
+<p>​    talk is cheap, show you the code</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> whiteList = [<span class="hljs-string">&#x27;/login&#x27;</span>] <span class="hljs-comment">// 白名单 无需跳转判断</span><br><span class="hljs-comment">// main.js</span><br>router.beforeEach(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;<br>  <span class="hljs-keyword">if</span> (store.getters.token) &#123; <span class="hljs-comment">// 判断是否有token</span><br>    <span class="hljs-keyword">if</span> (to.path === <span class="hljs-string">&#x27;/login&#x27;</span>) &#123;<br>      next(&#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/&#x27;</span> &#125;);<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (store.getters.roles.length === <span class="hljs-number">0</span>) &#123; <span class="hljs-comment">// 判断当前用户是否已拉取完user_info信息</span><br>        <span class="hljs-keyword">const</span> roles = <span class="hljs-keyword">await</span> store.dispatch(<span class="hljs-string">&#x27;user/getInfo&#x27;</span>) <span class="hljs-comment">// 此处是获取用户的身份信息如角色等</span><br>        <span class="hljs-keyword">await</span> store.dispatch(<span class="hljs-string">&#x27;permission/generateRoutes&#x27;</span>, roles)<br>        next(&#123; ...to, <span class="hljs-attr">replace</span>: <span class="hljs-literal">true</span> &#125;)<br>        &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;<br>          <span class="hljs-built_in">console</span>.log(err);<br>        &#125;);<br>      &#125; <span class="hljs-keyword">else</span> &#123;<br>        next() <span class="hljs-comment">//当有用户权限的时候，说明所有可访问路由已生成 如访问没权限的全面会自动进入404页面</span><br>      &#125;<br>    &#125;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (whiteList.indexOf(to.path) !== -<span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 在免登录白名单，直接进入</span><br>      next();<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      next(<span class="hljs-string">&#x27;/login&#x27;</span>); <span class="hljs-comment">// 否则全部重定向到登录页</span><br>    &#125;<br>  &#125;<br>&#125;);<br><br></code></pre></td></tr></table></figure>
+
+<p>上述的代码主要借鉴花裤衩大佬的思路，我司的业务中也是用token作为唯一凭证，当用户登录成功后，后端会返回token作为标识。</p>
+<p>而我司前端业务控制权限的实现中，主要在store.dispatch(‘permission/generateRoutes’, roles)中完成。</p>
+<h2 id="后端存储的数据格式"><a href="#后端存储的数据格式" class="headerlink" title="后端存储的数据格式"></a>后端存储的数据格式</h2><p>与后端同事沟通后，决定让后端返回路由数组，对路由数组不进行处理，由前端对这些路由数据进行递归生成路由树，其数据结构如下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs json">[<br>	&#123;<br>		id: 1,<br>		roles: [],<br>		title: &#x27;&#x27;,<br>		path: &#x27;&#x27;,<br>		component: &#x27;&#x27;,<br>		disable: ,<br>		hidden: ,<br>		icon: &quot;&quot;,<br>		name: &quot;&quot;,<br>		pid: <br>	&#125;<br>]<br></code></pre></td></tr></table></figure>
+
+<p>里面的数据可以根据实际业务需求添加，其实这些数据对应的就是数据库中路由表的每一行。</p>
+<h2 id="递归生成对应的路由书"><a href="#递归生成对应的路由书" class="headerlink" title="递归生成对应的路由书"></a>递归生成对应的路由书</h2><p>拿到数据后，进行遍历处理，首先处理pid为null的数据，pid为null意味着是根节点，在菜单上显示即为一级菜单</p>
+<p>遍历代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> menuRouters = [] <span class="hljs-comment">// 定义一个空数组，这个是用来装真正路由数据的</span><br><br>menuList.forEach(<span class="hljs-function">(<span class="hljs-params">m, i</span>) =&gt;</span> &#123;<br>    <br>  <span class="hljs-keyword">if</span> (m.pid === <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// 根节点</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-built_in">module</span> = &#123;<br>      path: m.path,<br>      component: Layout,<br>      redirect: m.redirect,<br>      name: m.name,<br>      meta: &#123; <span class="hljs-attr">id</span>: m.id, <span class="hljs-attr">title</span>: m.title, <span class="hljs-attr">icon</span>: m.icon, <span class="hljs-attr">roles</span>: m.roles, <span class="hljs-attr">disable</span>: m.disable &#125;, <br>      children: []<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span> (m.hidden !== <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// hidden用于控制该项菜单是否显示在侧边栏</span><br>      <span class="hljs-built_in">module</span>.hidden = m.hidden<br>    &#125;<br>      <br>    <span class="hljs-keyword">if</span> (m.alwaysShow !== <span class="hljs-literal">null</span>) &#123; <span class="hljs-comment">// alwaysShow如果设置为true则始终显示根菜单</span><br>      <span class="hljs-built_in">module</span>.alwaysShow = m.alwaysShow<br>    &#125;<br>      <br>    menuRouters.push(<span class="hljs-built_in">module</span>)<br>  &#125;<br>&#125;)<br>convertTree(menuRouters, menuList)  <span class="hljs-comment">// 递归遍历后台返回的路由菜单</span><br>menuRouters.push(&#123; <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-attr">redirect</span>: <span class="hljs-string">&#x27;/404&#x27;</span>, <span class="hljs-attr">hidden</span>: <span class="hljs-literal">true</span> &#125;) <span class="hljs-comment">// 最后添加404</span><br><span class="hljs-keyword">const</span> accessedRoutes = filterAsyncRoutes(menuRouters, roles)<br>router.addRoutes(accessedRoutes)<br>router.options.routes = constantRoutes.concat(accessedRoutes)<br><br></code></pre></td></tr></table></figure>
+
+<p>在第一次遍历完数据后，找到所有pid为null的根节点，生成根节点路由数组，然后在根据根节点路由数组与路由数据递归生成整个路由树，即上述代码中convertTree函数的功能</p>
+<p>convertTree函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 递归遍历后台返回的路由菜单</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;*&#125;</span> <span class="hljs-variable">routers</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;*&#125;</span> <span class="hljs-variable">menuList</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">convertTree</span>(<span class="hljs-params">routers, menuList</span>) </span>&#123;<br>  routers.forEach(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> &#123;<br>    menuList.forEach(<span class="hljs-function">(<span class="hljs-params">m, i</span>) =&gt;</span> &#123;<br>      <span class="hljs-keyword">if</span> (m.pid &amp;&amp; m.pid === r.meta.id) &#123; <span class="hljs-comment">// 两次循环 </span><br>        <span class="hljs-keyword">if</span> (!r.children) r.children = [] <span class="hljs-comment">// 若根节点没有子节点 则添加子节点数组</span><br>        <span class="hljs-keyword">const</span> menu = &#123;<br>          path: m.path,<br>          name: m.name,<br>          component: <span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> &#123; <span class="hljs-built_in">require</span>([<span class="hljs-string">&#x27;@/views/&#x27;</span> + m.component], resolve) &#125;, <span class="hljs-comment">// 引入子节点组件</span><br>          meta: &#123; <span class="hljs-attr">id</span>: m.id, <span class="hljs-attr">title</span>: m.title, <span class="hljs-attr">icon</span>: m.icon, <span class="hljs-attr">roles</span>: m.roles, <span class="hljs-attr">keepAlive</span>: m.noCache, <span class="hljs-attr">disable</span>: m.disable &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (m.hidden !== <span class="hljs-literal">null</span>) &#123;<br>          menu.hidden = m.hidden<br>        &#125;<br>        <span class="hljs-keyword">if</span> (m.alwaysShow !== <span class="hljs-literal">null</span>) &#123;<br>          menu.alwaysShow = m.alwaysShow<br>        &#125;<br>        r.children.push(menu)<br>      &#125;<br>    &#125;)<br>    <span class="hljs-keyword">if</span> (r.children) convertTree(r.children, menuList) <span class="hljs-comment">//若子节点还有孩子节点 则继续递归</span><br>  &#125;)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="路由树筛选"><a href="#路由树筛选" class="headerlink" title="路由树筛选"></a>路由树筛选</h2><p>当convertTree函数递归完毕后，就已近将后端返回的所有路由数据生成了路由树，接下来则需要对生成的路由树中安装角色进行进行过滤</p>
+<p>即遍历代码中filterAsyncRoutes函数实现的功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 递归过滤异步路由表，返回符合用户角色权限的路由表</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param </span>routes 需过滤的路由表</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param </span>role 用户角色</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">filterAsyncRoutes</span>(<span class="hljs-params">routes, roles</span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> res = []<br>  routes.forEach(<span class="hljs-function"><span class="hljs-params">route</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> tmp = &#123; ...route &#125;<br>    <span class="hljs-keyword">if</span> (hasPermission(roles, tmp)) &#123;<br>      <span class="hljs-keyword">if</span> (tmp.children) &#123;<br>        tmp.children = filterAsyncRoutes(tmp.children, roles) <span class="hljs-comment">// 若有子节点 则继续递归判</span><br>      &#125;<br>      res.push(tmp)<br>    &#125;<br>  &#125;)<br>  <span class="hljs-keyword">return</span> res<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>hasPermission函数主要是用于判断某项路由是否拥有对应的用户角色</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 通过meta.role判断是否与当前用户权限匹配</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;Array&#125;</span> <span class="hljs-variable">role</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@param <span class="hljs-type">&#123;Object&#125;</span> <span class="hljs-variable">route</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@return <span class="hljs-type">&#123;boolean&#125;</span></span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">hasPermission</span>(<span class="hljs-params">roles, route</span>) </span>&#123;<br>  <span class="hljs-keyword">if</span> (route.meta &amp;&amp; route.meta.roles) &#123;<br>    <span class="hljs-keyword">return</span> roles.some(<span class="hljs-function"><span class="hljs-params">role</span> =&gt;</span> route.meta.roles.includes(role)) <span class="hljs-comment">// 判断该级路由是否包含用户的角色</span><br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-comment">// 该级路由没有roles属性或meta属性 表明该级路由不需要权限</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span><br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>当路由树过滤完毕后，使用vue-router中的addRoutes函数将过滤后的路由树添加到路由数组中，</p>
+<p>注意 最后还需要router.options.routes = constantRoutes.concat(accessedRoutes) 将动态筛选后的路由与白名单路由结合后赋值给router 才能生效</p>
+<h1 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h1><p>​    这个需求是进入我司后负责的第一个需求，本来弄成word在组内分享完毕后一直放在电脑上，最近才发现放在本地十分不便。在想想作为一个程序员连自己的博客都没，十分不好意思，最后就将这篇文章整理后上传到自己的博客上吧。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vue-%E5%8A%A8%E6%80%81%E6%9D%83%E9%99%90/">-vue -动态权限</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <span id="runtime_span"></span> 
+    <script type="text/javascript">
+    	function show_runtime(){
+    		window.setTimeout("show_runtime()",1000);
+    		X=new Date("02/26/2021 09:00:00");
+    		Y=new Date();
+    		T=(Y.getTime()-X.getTime());
+    		M=24*60*60*1000;
+    		a=T/M;
+    		A=Math.floor(a);
+    		b=(a-A)*24;
+    		B=Math.floor(b);
+    		c=(b-B)*60;C=Math.floor((b-B)*60);
+    		D=Math.floor((c-C)*60);
+    		runtime_span.innerHTML="网站已安全运行"+A+"天"+B+"小时"+C+"分"+D+"秒"
+    		}
+    		show_runtime();
+    </script>
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
