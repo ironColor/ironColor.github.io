@@ -8,7 +8,7 @@
     <link href="/2021/03/09/%E5%9F%BA%E4%BA%8EVUE%E7%9A%84%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
     <url>/2021/03/09/%E5%9F%BA%E4%BA%8EVUE%E7%9A%84%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">我司最近开发的业务中，涉及到上传百兆的文件。原本的文件上传是直接使用elementui封装的组件，结果一测试上传百兆的文件，直接好家伙时间长达7分钟。没办法，这个轮子不能用，只好自己造一个轮子试试。<br></code></pre></td></tr></table></figure>]]></content>
     
     
     
