@@ -15,7 +15,8 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="">
+    <meta name="description" content="
+在度过了忙碌的四月之后，终于有时间来写写博客了。">
   
   <meta name="author" content="hbw">
   <meta name="keywords" content="">
@@ -230,18 +231,20 @@
             <h1 style="display: none">跨域</h1>
             
             <div class="markdown-body">
-              <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plain">在度过了忙碌的四月之后，终于有时间来写写博客了。<br></code></pre></td></tr></table></figure>
-
+              <blockquote>
+<p>在度过了忙碌的四月之后，终于有时间来写写博客了。</p>
+<span id="more"></span>
+</blockquote>
 <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p><strong>URL构成</strong>：[协议名]://[域名]:[端口号]/[请求资源地址]</p>
 <p><strong>同源</strong>：当两个url的协议、域名、端口都相同时，则表示同源。</p>
 <p><strong>不同源</strong>：协议、域名、端口三者中任一不相同，则为不同源。</p>
-<p>**同源策略(SOP: Same-Origin Policy)**：浏览器中核心的安全功能，用来限制某个源内的文档或脚本与另一源内的资源进行交互，减少潜在的攻击。</p>
+<p><strong>同源策略(SOP: Same-Origin Policy)</strong>：浏览器中核心的安全功能，用来限制某个源内的文档或脚本与另一源内的资源进行交互，减少潜在的攻击。</p>
 <p><strong>跨域</strong>：不同源之间相互请求资源，则产生跨域。所带来的限制：请求结果被拦截、Cookie、LocalStorage无法读取、DOM无法获得。</p>
 <h1 id="解决方案-JSONP"><a href="#解决方案-JSONP" class="headerlink" title="解决方案-JSONP"></a>解决方案-JSONP</h1><p>JSONP(JSON with Padding)貌似是最早的跨域解决方案，现在前端工程化的情况下，这个方案用的不多了。</p>
 <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><strong>利用 <code>&lt;script&gt;</code> 标签没有跨域限制（link、img、frame标签也没有限制）的漏洞，网页可以得到从其他来源动态产生的 JSON 数据。JSONP请求一定需要对方的服务器做支持才可以。</strong></p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ol>
 <li>创建业务处理的函数，该函数名会传递给服务器端，服务器返回的数据（可作为该函数的形参）是实际所需要处理的。</li>
-<li>创建<script>标签，将<script>标签的src属性声明为对应的服务器端API地址，同时还需要向服务器传递该函数名。</li>
+<li>创建script标签，将script标签的src属性声明为对应的服务器端API地址，同时还需要向服务器传递该函数名。</li>
 <li>服务器接收到请求后，完成相应的业务处理后，且将需要的数据放到回调参数上返回出给客户端。</li>
 </ol>
 <p>这其实就相当于后端返回一个callback(‘asss’)，前端直接将执行该函数</p>
@@ -252,7 +255,7 @@
 <h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p>JSONP的兼容性好，能够解决跨域的数据访问问题，但是只支持get方法，并且不够灵活。</p>
 <h1 id="解决方案-devServer-proxy"><a href="#解决方案-devServer-proxy" class="headerlink" title="解决方案-devServer.proxy"></a>解决方案-devServer.proxy</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>devServer是webpack的核心之一，可以在devServer中配置热更新、请求代理。</p>
 <p>浏览器因为同源策略，所以有跨域的限制，而服务器上没有跨域的限制，而通过一个代理服务器将我们的请求转发就可以避免跨域的问题。这个方法也是限制Vue项目在开发环境中使用最多的解决方案（proxy大法确实顶）。</p>
-<p><img src="C:\Users\Op-energy\AppData\Roaming\Typora\typora-user-images\image-20210504235229645.png" srcset="/img/loading.gif" alt="image-20210504235229645"></p>
+<p><img src="image-20210504235229645.png" srcset="/img/loading.gif" alt="image-20210504235229645"></p>
 <h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><p>vue项目通过配置vue.config.js文件，来设置代理服务器转发的地址，在设置代理转发时要将changeOrigin设置为true。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">module</span>.exports = &#123;<br>    lintOnSave: <span class="hljs-literal">false</span>,<br>    devServer: &#123;<br>        proxy: &#123;<br>            <span class="hljs-string">&#x27;/&#x27;</span>: &#123;<br>                target: <span class="hljs-string">&#x27;http://127.0.0.1:8888&#x27;</span>,<br>                changeOrigin: <span class="hljs-literal">true</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
@@ -285,8 +288,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/02/Node/">
-                        <span class="hidden-mobile">Node</span>
+                      <a href="/2021/03/14/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                        <span class="hidden-mobile">大文件上传</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
