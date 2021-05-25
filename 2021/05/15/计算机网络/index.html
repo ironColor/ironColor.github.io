@@ -1,0 +1,740 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/top1.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="hbw">
+  <meta name="keywords" content="">
+  
+  <title>计算机网络 - ShowMeCode</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>去想，去做，去爱</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bk-min.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-15 10:15" pubdate>
+        2021年5月15日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      75
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机网络</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>在一次关于计算机网络的闲谈时，发现很多知识点都记不清楚了，而最近刚好又看到一个大佬关于前端代码部署的文章，里面有不少关于http的知识。那就乘风好借力，将计算机网络的相关知识回顾总结一下。</p>
+</blockquote>
+<h1 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h1><p>计算机网络体系结构分为：OSI（概念清晰，但不实用）、TCP/IP（广泛使用）、五层体系结构(方便学习)</p>
+<p><img src="1.png" srcset="/img/loading.gif" alt="1"></p>
+<blockquote>
+<p>tips:</p>
+<p>比特(bit):网络中的基本单位也是计算机内部数据存储的最小单位。</p>
+<p>字节（Byte）：8个比特组成一个字节。</p>
+<p>字：计算机进行数据处理时，一次存取、加工和传送的数据长度称为字，一个字通常由一个或多个（一般是字节的整数位）字节构成。</p>
+<p>帧（Frame）：数据链路层的协议数据单元。设备将bit组成Byte,然后把这些Byte封装成帧。最小帧是64Byte,最大帧是1518Byte。</p>
+<p>mtu（Maximum Transmission Unit，MTU） 最大传输单元：帧的大小是有设备的MTU确定的。</p>
+<p>以太网和局域网： 以太网是一种局域网，而局域网却不一定是以太网，只是由于目前大多数的局域网是以太网，所以一般说局域网，大家都默认为以太网。</p>
+</blockquote>
+<p><strong>OSI中各层详解</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">层级</th>
+<th align="center">作用</th>
+<th align="center">传输单位</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">物理层</td>
+<td align="center">传输比特流</td>
+<td align="center">比特</td>
+<td align="center">利用传输介质为通信的两端，实现比特流的透明传输</td>
+</tr>
+<tr>
+<td align="center">数据链路层</td>
+<td align="center">1.将网络层传下来的IP数据报组成帧<br />   2. 检测&amp;校验物理层传输上产生的差错</td>
+<td align="center">帧</td>
+<td align="center">组帧、差错控制、流量控制和传输管理</td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center">将分组数据从源端传到目的端</td>
+<td align="center">数据报</td>
+<td align="center">封装数据成分组/包、路由选择、拥塞控制、差错控制</td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center">为不同主机中的进程提供通信</td>
+<td align="center">报文端（TCP)/用户数据报（UDP)</td>
+<td align="center">端到端之间提供传输服务</td>
+</tr>
+<tr>
+<td align="center">会话层</td>
+<td align="center">不同主机上各进程之间的会话</td>
+<td align="center">/</td>
+<td align="center">/</td>
+</tr>
+<tr>
+<td align="center">表示层</td>
+<td align="center">处理两个通信系统中交换信息的方式</td>
+<td align="center">/</td>
+<td align="center">/</td>
+</tr>
+<tr>
+<td align="center">应用层</td>
+<td align="center">为特殊的网络应用提供访问OSI环境手段</td>
+<td align="center">/</td>
+<td align="center">/</td>
+</tr>
+</tbody></table>
+<p>TCP/IP体系结构中网络层就是负责与链路层的数据传输工作，相当于OSI体系中的数据链路层</p>
+<h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><blockquote>
+<p>在底层多种物理设备中传输比特流，关注数据通信的物理特性    </p>
+</blockquote>
+<p>物理层考虑的是如何传输比特流，并不管物理介质具体是什么</p>
+<ul>
+<li>物理层主要是确定与传输媒体的接口有关的一些特性：机械特性（指明接口所用接线器的形状和尺寸、引脚数目等）、电气特性（指明在接口电缆的各条线上出现的电压的范围）、功能特性（指明某条线上出现的某一电平的电压的意义）、过程特性（指明对于不同功能的各种可能事件的出现顺序）</li>
+<li>计算机中的数据在物理层中会以模拟信号或者数字信号进行传输</li>
+<li>信道复用：频分复用、时分复用、波分复用、码分复用</li>
+</ul>
+<h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><blockquote>
+<p>管理相邻节点（可以理解为物理层中有多个设备如中继器、路由器等相互连接）之间的数据通信</p>
+</blockquote>
+<p>​    数据链路层最基本的服务是将源计算机网络层来的数据可靠的<font color='red'>传输到相邻节点的目标计算机的网络层</font>。数据链路层使用的信道类型：<code>点对点信道</code>和<code>广播信道</code>。</p>
+<h2 id="点对点信道"><a href="#点对点信道" class="headerlink" title="点对点信道"></a>点对点信道</h2><p>​        通信步骤：</p>
+<ol>
+<li><p>结点 A 的数据链路层把网络层交下来的 IP 数据报添加首部和尾部封装成帧。、</p>
+</li>
+<li><p>结点 A 把封装好的帧<code>发送</code>给结点 B 的数据链路层。</p>
+</li>
+<li><p>若结点 B 的数据链路层收到的帧无<code>差错</code>，则从收到的帧中提取出 IP 数据报<code>交给网络层</code>，否则丢弃这个帧。</p>
+<h2 id="封装成帧"><a href="#封装成帧" class="headerlink" title="封装成帧"></a>封装成帧</h2><p>是在一段数据的前后分别添加首部和尾部，这样就构成了一个帧。接收端的数据链路层在收到物理层上交的比特流后，就能根据首部和尾部的标记，从收到的比特流中识别帧的开始和结束。</p>
+<p><img src="2.png" srcset="/img/loading.gif" alt="2"></p>
+<p><strong>帧定界符</strong>：控制字符<code>SOH</code>和<code>EOT</code>分别表示帧开始和结束。(若数据部分刚好有SOH和EOT则会进行转义)</p>
+<h2 id="透明传输"><a href="#透明传输" class="headerlink" title="透明传输"></a>透明传输</h2><p>​    表示无论什么样的比特组合的数据，都能够按照原样没有差错地通过这个数据链路层。因此，对所传送的数据来说，这些数据就”看不见”数据链路层有什么妨碍数据传输的东西，即数据链路层对这些数据来说是透明的。</p>
+<p><img src="3.png" srcset="/img/loading.gif" alt="3"></p>
+<h2 id="差错检测"><a href="#差错检测" class="headerlink" title="差错检测"></a>差错检测</h2><p>传输差错：</p>
+<ol>
+<li><strong>比特差错</strong>：帧里的比特在传输过程中可能会产生差错: 1 可 能会变成 0，而 0 也可能变成 1。</li>
+<li>帧丢失、帧重复、帧失序。</li>
+</ol>
+<p><strong>循环冗余检验（CRC）检错技术</strong>：在数据链路层广泛使用了CRC。但使用CRC只能做到对帧的<code>无差错接受</code>，实现无比特差错，<code>而非可靠传输</code>。接收端丢弃的帧虽然曾收到了，但最终还是因为有差错被丢弃（即不能纠错）。</p>
+</li>
+</ol>
+<h2 id="广播信道"><a href="#广播信道" class="headerlink" title="广播信道"></a>广播信道</h2><p>广播信道可以进行一对多通信。</p>
+<h3 id="局域网的数据链路层"><a href="#局域网的数据链路层" class="headerlink" title="局域网的数据链路层"></a>局域网的数据链路层</h3><p>局域网特点：网络为一个单位所拥有，且地理范围和站点数有限</p>
+<p>局域网的数据链路层被拆分成了两个子层：</p>
+<ul>
+<li><strong>逻辑链路控制LLC</strong>子层</li>
+<li><strong>媒体接入控制MAC</strong>子层：与接入到传输媒体有关的内容都放在MAC</li>
+</ul>
+<h3 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a>CSMA/CD协议</h3><p>CSMA/CD协议即带冲突检测的载波监听多路访问技术，在传统的共享以太网中，所有的节点共享传输介质。如何保证传输介质有序、高效地为许多节点提供传输服务，就是以太网的介质访问控制协议要解决的问题。</p>
+<p>　　CSMA技术属于介质访问控制技术中的随机接入/访问技术,</p>
+<p><strong>CSMA/CD协议</strong>的特点</p>
+<ul>
+<li><strong>多点接入</strong>：多台计算机以多点接入的方式连在一根总线上，是总线型网络。</li>
+<li><strong>载波监听</strong>：发送前先监听</li>
+<li><strong>碰撞检测</strong>：适配器<code>边发送边监听</code>。一旦发生碰撞，传输信号将严重失真，因此需要立即停止发送，并发出<code>人为干扰信号</code>，以便告诉所有用户已经发生碰撞，接着执行指数退避算法。</li>
+<li>半双工通信</li>
+</ul>
+<p><img src="4.png" srcset="/img/loading.gif" alt="4"></p>
+<p><strong>争用期</strong>：一个站发出数据后，最多经过<code>两倍的总线端到端的传播时延</code>，就知道是否发生碰撞，这个时间称为争用期。</p>
+<p>最短帧长：以太网规定最短帧长为64字节，但凡小于64字节的帧都是由于冲突和异常中止的无效帧。</p>
+<p><strong>截断二进制指数退避算法</strong>：用来确定碰撞后重传的时机，算法如下：</p>
+<ol>
+<li>规定争用期为<code>2t</code>。</li>
+<li>随机从[0,1,…,(2k-1)]中随机取一个数，记为<code>r</code>。其中k=min(重传次数,10)。重传时间为<code>rt</code>。</li>
+<li>如果重传16次仍然不成功，则丢弃该帧，并向高层报告。</li>
+</ol>
+<h2 id="MAC子层"><a href="#MAC子层" class="headerlink" title="MAC子层"></a>MAC子层</h2><h4 id="（1）MAC层硬件地址"><a href="#（1）MAC层硬件地址" class="headerlink" title="（1）MAC层硬件地址"></a>（1）MAC层硬件地址</h4><p>在局域网中，<strong>硬件地址</strong>又称<strong>物理地址</strong>、<strong>MAC地址</strong>，是每一台计算机中固化在适配器的ROM中的地址，与主机所在的地点无关。它的长度为6字节，前三个字节由注册管理机构RA来分配，称为<code>组织唯一标识符OUI</code>，也称<code>公司标识符</code>，后三位由厂家自行指派，称为<code>扩展标识符</code>。</p>
+<p><strong>混杂方式</strong>是以太网适配器的一种特殊工作方式。工作在混杂方式的适配器只要检测到有帧在以太网上传输就都悄悄地接收下来，而不管这些帧是发往哪个站。<code>嗅探器</code>也是使用这种方式。黑客常利用这种方法非法获取网上用户的口令。</p>
+<h4 id="（2）MAC帧格式"><a href="#（2）MAC帧格式" class="headerlink" title="（2）MAC帧格式"></a>（2）MAC帧格式</h4><p>类型字段：标志上一层使用什么协议。 前同步码：从MAC子层向下传到物理层时，还要在帧的前面插入8字节，第一个字段位7字节的前同步码，其作用是使接收端的适配器在接收MAC帧时能够迅速调整它的时钟频率。 帧开始定界符：定义为10101011，前六位的作用与前同步码相同，后两位是告知适配器MAC帧的信息即将到来。</p>
+<p><img src="5.png" srcset="/img/loading.gif" alt="5"></p>
+<p>以太网的数据传送单位为帧，并且各帧之间需要存在间隙。因此，以太网不需要使用帧结束定界符，也不需要使用字节插入来保证透明传输。</p>
+<h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><p>​    网络层主要负责两个主机之间的数据报通信，在下图中就是主机A到主机B之间的通信，而数据链路层负责每段链路之间的通信。因为有可能主机A想要发送的数据会很大，此时网络层会将数据划分成多个相同大小的分组，然后将这些分组一个接一个地发往里与A主机相联的<code>路由A1</code> ,当<code>A1</code>接到分组后，先放入缓冲区，再按一定的路由算法确定该分组下一步将发注哪个结点，如此一个结点一个结点传递，直到<code>最终目的主机B</code>，这就是分组交换。（其实链路层因为MTU的限制，所以数据得分片）</p>
+<p><img src="6.png" srcset="/img/loading.gif" alt="6"></p>
+<p>​    网络层传输的数据单位是<code>数据报</code>，也是网络传输的基本数据单元，包含一个<code>报头（header）</code>和<code>数据</code>本身。</p>
+<p><img src="7.png" srcset="/img/loading.gif" alt="7"></p>
+<ul>
+<li>首部的固定部分为20字节</li>
+<li>首部长度，<code>单位是4B</code>，最小为5（固定部分为20字节）</li>
+<li>总长度 =  首部 + 数据</li>
+<li>生存时间是<code>TTL</code>，它告诉网络，数据包在网络中的时间是否太长而应被丢弃。每经过一个路由器减一，变成0就丢弃</li>
+<li>协议是指数据部分用的什么协议，TCP<code>协议用</code>6<code>表示，</code>UDP<code>协议用</code>17`表示即可。</li>
+<li><code>首部校验和占16位</code>。这个字段只检验数据报的首部，但不包括数据部分。</li>
+<li>目的地址和源地址都是<code>IP地址</code>，目的地址是通过<code>DNS</code>查询得来的。</li>
+<li>标识、标志、片偏移  表示 ip分片信息</li>
+<li>标识：同一数据的分片 相同</li>
+<li>标志占3位，但只有两位有意义，第一个位叫<code>MF</code>，<code>MF=1</code>即表示后面“还有分片”的数据报。<code>MF=0</code>表示这已是若干数据报片中的最后一个。中间的一位记为<code>DF</code>(Don’t Fragment)，意思是“不能分片”。只有当<code>DF=0</code>时才允许分片。</li>
+<li>片偏移，较长的分组在分片后，某片在原分组中的相对位置。</li>
+</ul>
+<h2 id="网络地址转换–NAT"><a href="#网络地址转换–NAT" class="headerlink" title="网络地址转换–NAT"></a>网络地址转换–NAT</h2><p>在内网环境下，如何连接因特网</p>
+<p>NAT:在将内网连接到因特网的路由器上安装NAT软件，该路由器称为NAT路由器（该路由器至少一个全球IP）</p>
+<p>其实就相当于NAT路由作为一个中间人转发和接收所有数据，内网中的主机没有全球IP，他们的在内网中的地址不会在数据报中记录，内网中的主机也无法跟外网通信，内网中主机发送的数据报在经过NAT路由器时会将地址更换，外网发送回来的数据被NAT路由器接收时效果一样。（当然NAT路由器会维护一个转换表将内网的ip转换成对应的端口号）</p>
+<h2 id="子网划分"><a href="#子网划分" class="headerlink" title="子网划分"></a>子网划分</h2><ul>
+<li>每个子网中的全0网络地址和全1广播地址均不能作为主机ip来使用。</li>
+<li>目的地址和子网掩码进行与运算就可以得到子网地址</li>
+</ul>
+<h1 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h1><p>传输层主要提供进程之间的逻辑通信，包括可靠传输协议TCP和不可靠传输协议UDP</p>
+<h2 id="UDP协议"><a href="#UDP协议" class="headerlink" title="UDP协议"></a>UDP协议</h2><ul>
+<li>UDP是无连接的，减少开销和发送数据之前的时间延迟</li>
+<li>UDP不保证交付可靠，由应用层来保证</li>
+<li>UDP是面向报文的，适合一次传输少量数据的网络应用。UDP协议会把应用层的全部内容作为自己的数据报部分，网络层的IP协议也只是加入一个IP首部，而在链路层，如果数据超过MTU就会分片，这就更加大了UDP的不可控性，更容易丢失数据。</li>
+<li>UDP没有拥塞控制，适合很多实时应用。</li>
+<li>UDP首部比较小，只有8字节。</li>
+</ul>
+<p><img src="8.png" srcset="/img/loading.gif" alt="8"></p>
+<ul>
+<li>16位端口号占了2B，也就是16位，说明端口号的范围是<code>0 - 65535</code>。源端口号可以没有，因为不希望收到对方的回应，可以写全0，目的端口是一定要有的。</li>
+<li>16位UDP长度是指<code>首部+数据的长度</code>，比如数据2B，首部固定是8B，那么UDP长度就是2+8 = 10B</li>
+<li>16位UDP校验和，是用来校验<code>首部和数据有错误</code>，如果有错就丢弃掉。</li>
+</ul>
+<h2 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h2><ul>
+<li>TCP协议面向连接，提高可靠交付、无差错、不丢失、按序到达的服务</li>
+<li>全双工（连接双方都可以同时收发数据）</li>
+<li>面向字节流</li>
+</ul>
+<h3 id="TCP首部"><a href="#TCP首部" class="headerlink" title="TCP首部"></a>TCP首部</h3><p><img src="9.png" srcset="/img/loading.gif" alt="9"></p>
+<ul>
+<li>源端口号: 发送方应用程序的端口 </li>
+<li>目的端口：目的方应用程序的端口号</li>
+<li>序号：本次发送数据中的第一个字节的序号</li>
+<li>确认号：期待收到对方下一个报文段的第一个数据字节的编号，exp: 确认号K，表示K-1为止的数据都已近正确收到</li>
+<li>数据偏移：该TCP报文段的数据距离起始处的距离</li>
+<li>ACK: 为1表示确认号合法有效，为0表示不包含确认信息</li>
+<li>SYN：为1表示用于发起一个连接</li>
+<li>FIN: 为1表示发送方已近没有数据要发送，需要释放连接</li>
+</ul>
+<h3 id="TCP建立连接"><a href="#TCP建立连接" class="headerlink" title="TCP建立连接"></a>TCP建立连接</h3><p><img src="10.jpg" srcset="/img/loading.gif" alt="10"></p>
+<h3 id="TCP连接释放"><a href="#TCP连接释放" class="headerlink" title="TCP连接释放"></a>TCP连接释放</h3><p><img src="11.jpg" srcset="/img/loading.gif" alt="11"></p>
+<ul>
+<li>客户端发起请求，FIN=1,seq = x（x为上一次客户端发送的最后一个字节的序号+1）</li>
+<li>服务器收到客户端的请求断开链接的报文之后，返回确认信息。这个时候，客户端不能给服务器发送信息报文，只能接收。但是服务器要是还有信息要传给服务器，仍然能传送。</li>
+<li>当服务器也没有可以发送的数据时，给客户端发送请求结束的报文</li>
+</ul>
+<h3 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h3><p>流量控制就是为了调节TCP连接两方的收发速率，解决方案–滑动窗口</p>
+<p>发送方和接收方各有一个窗口，接收方通过 TCP 报文段中的窗口字段告诉发送方自己的窗口大小，发送方根据这个值和其它信息设置自己的窗口大小。</p>
+<p><strong>发送窗口内的字节都允许被发送，接收窗口内的字节都允许被接收。</strong>如果发送窗口左部的字节已经发送并且收到了确认，那么就将发送窗口向右滑动一定距离，直到左部第一个字节不是已发送并且已确认的状态；接收窗口的滑动类似，接收窗口左部字节已经发送确认并交付主机，就向右滑动接收窗口。</p>
+<p><img src="12.png" srcset="/img/loading.gif" alt="12"></p>
+<h3 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h3><p>拥塞控制是为了避免分组丢失的情况下，发送方还一直继续重传，导致网络高度拥塞。流量控制是为了让接收方能来的及接收，而拥塞控制是为了降低整个网络的拥塞程度。</p>
+<ul>
+<li>TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。</li>
+<li>发送方需要维护一个叫做拥塞窗口（cwnd）的状态变量，注意拥塞窗口与发送方窗口的区别：拥塞窗口只是一个状态变量，实际决定发送方能发送多少数据的是发送方窗口。</li>
+</ul>
+<h4 id="慢开始与拥塞避免"><a href="#慢开始与拥塞避免" class="headerlink" title="慢开始与拥塞避免"></a>慢开始与拥塞避免</h4><p><img src="13.png" srcset="/img/loading.gif" alt="13"></p>
+<ul>
+<li>发送的最初执行慢开始，令 cwnd = 1，发送方只能发送 1 个报文段；当收到确认后，将 cwnd 加倍，因此之后发送方能够发送的报文段数量为：2、4、8 …</li>
+<li>慢开始每个轮次都将 cwnd 加倍，这样会让 cwnd 增长速度非常快，从而使得发送方发送的速度增长速度过快，网络拥塞的可能性也就更高。设置一个慢开始门限 ssthresh，当 cwnd &gt;= ssthresh 时，进入拥塞避免，每个轮次只将 cwnd 加 1。</li>
+<li>出现了超时，则令 ssthresh = cwnd / 2，然后重新执行慢开始。</li>
+</ul>
+<h4 id="快重传与快恢复"><a href="#快重传与快恢复" class="headerlink" title="快重传与快恢复"></a>快重传与快恢复</h4><p><img src="14.png" srcset="/img/loading.gif" alt="14"></p>
+<ul>
+<li>在接收方，要求每次接收到报文段都应该对最后一个已收到的有序报文段进行确认。例如已经接收到 M1 和 M2，此时收到 M4，应当发送对 M2 的确认。</li>
+<li>在发送方，如果收到三个重复确认，那么可以知道下一个报文段丢失，此时执行快重传，立即重传下一个报文段。例如收到三个 M2，则 M3 丢失，立即重传 M3。</li>
+<li>在这种情况下，只是丢失个别报文段，而不是网络拥塞。因此执行快恢复，令 ssthresh = cwnd / 2 ，cwnd = ssthresh，注意到此时直接进入拥塞避免。</li>
+<li>慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。</li>
+</ul>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>HTTP协议定义了浏览器如何在万维网中请求文档，以及服务器如何将文档传输给浏览器</p>
+<p><img src="15.png" srcset="/img/loading.gif" alt="15"></p>
+<h2 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h2><ul>
+<li>GET: 用于请求服务器的某些资源</li>
+<li>HEAD: 请求资源的头部信息（也就是报文首部）并且这些头部与 HTTP GET 方法请求时返回的一致. 该请求方法的一个使用场景是在下载一个大文件前先获取其大小再决定是否要下载, 以此可以节约带宽资源</li>
+<li>POST:提交数据</li>
+<li>PUT：修改数据</li>
+<li>DELETE: 删除资源 </li>
+<li>CONNECT: 建立连接隧道，用于代理服务器</li>
+<li>OPTIONS: 与head类似，是客户端用于查看服务器的性能，当进行CORS跨域资源共享时，使用OPTIONS方法发送嗅探请求，以判断是否有对资源的访问权限。</li>
+</ul>
+<p>GET方法和POST方法的区别：</p>
+<p>1.GET和POST都是HTTP协议中的两种发送请求的方法</p>
+<p>2.GET把参数包含在URL中，POST通过request body传递参数，因此POST更合适传输敏感信息。</p>
+<p>3.GET语义上用于获取数据，POST用于提交数据</p>
+<p>4.GET请求参数需要使用encodeURLComponent进行编码</p>
+<h2 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h2><p>组成：协议、主机、端口、路径、查询参数、锚点组成  例如： <code>http://showmecode.xyz/2021/index.html?name=hbw&amp;age=23#start   </code></p>
+<p>URL只能使用ASCII,ASCII之外的字符是不支持显示的，因此URL引入了编码机制，将所有非ASCII码字符和界定符转为十六进制字节值，然后在前面加入%</p>
+<p>在地址栏带有查询参数时，如果不编码，非英文字符会按照操作系统的字符集进行编码提交到服务器，服务器会按照配置的字符集进行解码，所以<strong>如果编码时使用的字符集和解码字符集不一致</strong>，就会导致乱码，URL的编码方法和<code>encodeURI</code> 的编码规则相同。</p>
+<p>在常见的工作情况中是用javascript发送get请求，生成的URL包含汉字，会根据浏览器的编码规则不同生成(阮一峰大佬的说法)</p>
+<h2 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h2><ul>
+<li><strong>200 OK</strong>是见得最多的成功状态码。通常在响应体中放有数据。</li>
+<li><strong>204 No Content</strong>含义与 200 相同，但响应头后没有 body 数据。</li>
+<li><strong>404 Not Found</strong>: 表示没在服务器上找到相应的资源。</li>
+<li><strong>405 Method Not Allowed</strong>: 请求方法不被服务器端允许。</li>
+<li><strong>500 Internal Server Error</strong>: 仅仅告诉你服务器出错了，错误未知。</li>
+<li><strong>502 Bad Gateway</strong>: 服务器自身是正常的，但访问的时候出错了，错误未知。</li>
+<li><strong>304 Not Modified</strong>：协商缓存，缓存命中时会返回这个状态码</li>
+</ul>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>​    缓存带来的好处不言而喻，能够减少冗余的数据传输，更快加载页面，减轻服务器端压力等，同时也会造成缓存中的数据与服务器中的数据不一致等问题。</p>
+<p>​    浏览器请求第一次获取到资源后，根据返回的信息告诉如何缓存资源，后续请求时，若命中，则强缓存和协商缓存都会从缓存中加载资源</p>
+<h3 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h3><p>Expires</p>
+<p>​    该值是一个GMT时间格式字符串，浏览器第一次请求时，服务器会在返回头部加上Expires,下次请求，如果在这个时间之前则命中缓存。</p>
+<p>​    Expires方式的强缓存存在一个漏洞，过分依赖本地时间戳，如果客户端本地时间与服务器端的时间不同步，或者对客户端时间进行主动修改，那么缓存过期的判断就出现问题。</p>
+<p>Cache-Control </p>
+<p>​    该值是利用max-age判断缓存的生命周期，是以秒为单位，如何在生命周期时间内，则命中缓存</p>
+<p>​    Cache-control是HTTP1.1协议新增的字段，用于对expires的功能进行扩展和完善</p>
+<p>no-cache和 no-store</p>
+<p>​    no-cache和no-store是cache-control的一组互斥属性值，no-store则表示禁止使用任何缓存策略，no-cache表示为强制进行协商缓存，即对于每次发起的请求都不会再去判断强制缓存是否过期，而是直接与服务器协商来验证缓存的有效性，若缓存未过期，则会使用本地缓存。</p>
+<p>指定 <code>no-cache</code> 或 <code>max-age=0</code> 表示客户端可以缓存资源，每次使用缓存资源前都必须重新验证其有效性。<font color='red'>这意味着每次都会发起 HTTP 请求，但当缓存内容仍有效时可以跳过 HTTP 响应体的下载。</font></p>
+<p>private和public</p>
+<p><code>private</code> 和 <code>public</code> 也是 <code>cache-control</code> 的一组互斥属性值，它们用以明确响应资源是否可被代理服务器进行缓存。</p>
+<ul>
+<li>若资源响应头中的 <code>cache-control</code> 字段设置了 <code>public</code> 属性值，则表示响应资源既可以被浏览器缓存，又可以被代理服务器缓存。</li>
+<li><code>private</code> 则限制了响应资源只能被浏览器缓存，若未显式指定则默认值为 <code>private</code>。</li>
+</ul>
+<p>对于应用程序中不会改变的文件，通常可以在发送响应头前添加积极缓存。这包括例如由应用程序提供的静态文件，例如图像，CSS 文件和 JavaScript 文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">Cache-Control:public, max-age=<span class="hljs-number">31536000</span><br></code></pre></td></tr></table></figure>
+
+<p>max-age和s-maxage</p>
+<p><code>max-age</code> 属性值会比 <code>s-maxage</code> 更常用，它表示服务器端告知客户端浏览器响应资源的过期时长。在一般项目的使用场景中基本够用，对于大型架构的项目通常会涉及使用各种代理服务器的情况，这就需要考虑缓存在代理服务器上的有效性问题。这便是 <code>s-maxage</code> 存在的意义，它表示缓存在代理服务器中的过期时长，且仅当设置了 <code>public</code> 属性值时才有效。</p>
+<p>由此可见 <code>cache-control</code> 能作为 <code>expires</code> 的完全替代方案，并且拥有其所不具备的一些缓存控制特性，在项目实践中使用它就足够了，目前 <code>expires</code> 还存在的唯一理由是考虑可用性方面的向下兼容。</p>
+<h3 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h3><p>​    协商缓存就是在使用本地缓存之前，需要向服务器端发起一次 GET 请求，与之协商当前浏览器保存的本地缓存是否已经过期。</p>
+<p>​    协商缓存判断缓存有效的响应状态码是 <code>304</code>，即缓存有效响应重定向到本地缓存上。这和强制缓存有所不同，强制缓存若有效，则再次请求的响应状态码是 <code>200</code>。</p>
+<p>​    Last-Modified： 表示为为实体头部部分，response返回，表示为资源的最后更新时间 </p>
+<p>​    If-Modified-Since：通过比较两次的时间判断，资源在请求期间是否有修改，假如没有修改，则命中协商缓存，浏览器从缓存中读取资源，如果没有命中，资源有过修改，返回新的Last-Modified时间和服务器资源</p>
+<p>​    有些情况下仅判断最后修改日期来验证资源是否有改动是不够的：<br>1，存在周期性重写某些资源，但资源实际包含的内容并无变化；<br>2，被修改的信息并不重要，如注释等；<br>3，Last-Modified无法精确到毫秒，但有些资源更新频率有时会小于一秒。</p>
+<p>​    其实造成上述两种缺陷的原因相同，就是服务器无法仅依据资源修改的时间戳来识别出真正的更新，进而导致重新发起了请求，该重新请求却使用了缓存的 Bug 场景。</p>
+<p>​    ETag:为相应头部字段，表示资源内容的唯一标识，随服务器response返回，主要是服务器为不同资源进行哈希运算所生成的一个字符串，该字符串类似于文件指纹，只要文件内容编码存在差异，对应的 <code>ETag</code> 标签值就会不同，因此可以使用 <code>ETag</code> 对文件资源进行更精准的变化感知。</p>
+<p>​    一般响应头在协商协议中会同时包含last-modified和ETag，因为 ETag 比 <code>last-modified</code> 具有更准确的文件资源变化感知，所以它的优先级也更高，二者同时存在时以 <code>ETag</code> 为准。</p>
+<p>​    在协商缓存中，<code>ETag</code> 并非 <code>last-modified</code> 的替代方案而是一种补充方案，因为它依旧存在一些弊端。</p>
+<ul>
+<li>一方面服务器对于生成文件资源的 <code>ETag</code> 需要付出额外的计算开销，如果资源的尺寸较大，数量较多且修改比较频繁，那么生成 <code>ETag</code> 的过程就会影响服务器的性能。</li>
+<li>另一方面 <code>ETag</code> 字段值的生成分为强验证和弱验证，强验证根据资源内容进行生成，能够保证每个字节都相同；弱验证则根据资源的部分属性值来生成，生成速度快但无法确保每个字节都相同，并且在服务器集群场景下，也会因为不够准确而降低协商缓存有效性验证的成功率，所以恰当的方式是根据具体的资源使用场景选择恰当的缓存校验方式。</li>
+</ul>
+<h3 id="缓存决策"><a href="#缓存决策" class="headerlink" title="缓存决策"></a>缓存决策</h3><p>​    在不考虑客户端缓存容量与服务器算力的理想情况下，当然希望客户端浏览器上的缓存触发率尽可能高，留存时间尽可能长，同时还要 <code>ETag</code> 实现当资源更新时进行高效的重新验证。但实际情况往往是容量与算力都有限，因此就需要制定合适的缓存策略，来利用有限的资源达到最优的性能效果。</p>
+<p>​    而vue项目打包后生成的静态文件会带有一串哈希值，这样当发生文件修改后，不同的文件便会有不同的文件指纹，即需要请求的文件 URL 不同了，因此必然会发生对资源的重新请求。</p>
+<p>​    这样的做法能够及时修改更新、较长缓存过期时间及控制所能进行缓存的位置。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2010/02/url_encoding.html">关于URL编码</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/51c50cef-36e2-4e40-9a6d-c4c0bcc7b2b4#494Xb">HTTP缓存</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/14/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">
+                        <span class="hidden-mobile">大文件上传</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <span id="runtime_span"></span> 
+    <script type="text/javascript">
+    	function show_runtime(){
+    		window.setTimeout("show_runtime()",1000);
+    		X=new Date("02/26/2021 09:00:00");
+    		Y=new Date();
+    		T=(Y.getTime()-X.getTime());
+    		M=24*60*60*1000;
+    		a=T/M;
+    		A=Math.floor(a);
+    		b=(a-A)*24;
+    		B=Math.floor(b);
+    		c=(b-B)*60;C=Math.floor((b-B)*60);
+    		D=Math.floor((c-C)*60);
+    		runtime_span.innerHTML="网站已安全运行"+A+"天"+B+"小时"+C+"分"+D+"秒"
+    		}
+    		show_runtime();
+    </script>
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
